@@ -144,6 +144,7 @@ export default function HeroSection() {
             src="/images/logo.png"
             alt="CRUSADE Guild Logo"
             fill
+            unoptimized
             className="object-contain drop-shadow-[0_0_30px_rgba(255,215,0,0.3)]"
             priority
           />

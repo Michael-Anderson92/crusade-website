@@ -37,6 +37,7 @@ export default function Footer() {
                   src="/images/logo.png"
                   alt="CRUSADE Guild"
                   fill
+                  unoptimized
                   className="object-contain"
                 />
               </div>
