@@ -50,6 +50,7 @@ export default function Navbar() {
                   src="/images/logo.png"
                   alt="CRUSADE Guild"
                   fill
+                  unoptimized
                   className="object-contain drop-shadow-[0_0_8px_rgba(255,215,0,0.3)]"
                   priority
                 />
