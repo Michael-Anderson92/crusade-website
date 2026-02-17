@@ -1,26 +1,377 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ============================================
+   CRUSADE Guild Website — Design System
+   Tailwind v4 CSS-first configuration
+   ============================================ */
 
+/* ---------- Theme Tokens ---------- */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Gold */
+  --color-gold-50: #FFF9E0;
+  --color-gold-100: #FFF1A8;
+  --color-gold-200: #FFE566;
+  --color-gold-300: #FFD700;
+  --color-gold-400: #E6C200;
+  --color-gold-500: #B8960C;
+  --color-gold-600: #8A6F09;
+  --color-gold-700: #5C4A06;
+
+  /* Emerald (Fel Green) */
+  --color-emerald-50: #E0FFF0;
+  --color-emerald-100: #A8FFD4;
+  --color-emerald-200: #66FFB2;
+  --color-emerald-300: #00FF7F;
+  --color-emerald-400: #00CC66;
+  --color-emerald-500: #00994D;
+  --color-emerald-600: #006633;
+  --color-emerald-700: #00331A;
+
+  /* Crusade Red */
+  --color-crusade-50: #FFE8E8;
+  --color-crusade-100: #FFB3B3;
+  --color-crusade-200: #FF6666;
+  --color-crusade-300: #C41E3A;
+  --color-crusade-400: #A01830;
+  --color-crusade-500: #8B0000;
+  --color-crusade-600: #660000;
+  --color-crusade-700: #400000;
+
+  /* Dark Backgrounds */
+  --color-dark-50: #2A2A3E;
+  --color-dark-100: #22222F;
+  --color-dark-200: #1A1A2E;
+  --color-dark-300: #15151F;
+  --color-dark-400: #12121A;
+  --color-dark-500: #0E0E14;
+  --color-dark-600: #0A0A0F;
+  --color-dark-700: #06060A;
+
+  /* Silver / Metallic */
+  --color-silver-100: #F0F0F0;
+  --color-silver-200: #D4D4D4;
+  --color-silver-300: #C0C0C0;
+  --color-silver-400: #A0A0A0;
+  --color-silver-500: #808080;
+  --color-silver-600: #606060;
+
+  /* WoW Class Colors */
+  --color-class-warrior: #C79C6E;
+  --color-class-paladin: #F58CBA;
+  --color-class-hunter: #ABD473;
+  --color-class-rogue: #FFF569;
+  --color-class-priest: #FFFFFF;
+  --color-class-shaman: #0070DE;
+  --color-class-mage: #69CCF0;
+  --color-class-warlock: #9482C9;
+  --color-class-druid: #FF7D0A;
+
+  /* Semantic Colors */
+  --color-background: var(--color-dark-600);
+  --color-foreground: #E8E6E3;
+  --color-muted: #9CA3AF;
+  --color-accent: var(--color-gold-300);
+  --color-surface: var(--color-dark-400);
+  --color-surface-elevated: var(--color-dark-200);
+  --color-border: rgba(255, 215, 0, 0.15);
+  --color-border-strong: rgba(255, 215, 0, 0.35);
+
+  /* Typography */
+  --font-heading: var(--font-cinzel), Georgia, serif;
+  --font-heading-decorative: var(--font-cinzel-decorative), var(--font-cinzel), Georgia, serif;
+  --font-body: var(--font-geist-sans), "Inter", system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), "JetBrains Mono", monospace;
+
+  /* Spacing (extending defaults) */
+  --spacing-18: 4.5rem;
+  --spacing-88: 22rem;
+  --spacing-128: 32rem;
+
+  /* Border Radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+
+  /* Animations */
+  --animate-glow: glow 2s ease-in-out infinite alternate;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-shimmer: shimmer 3s ease-in-out infinite;
+  --animate-fade-in: fadeIn 0.6s ease-out forwards;
+  --animate-fade-up: fadeUp 0.6s ease-out forwards;
+  --animate-pulse-gold: pulseGold 2s ease-in-out infinite;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ---------- Keyframes ---------- */
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.3),
+                 0 0 20px rgba(255, 215, 0, 0.15);
+  }
+  to {
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.6),
+                 0 0 40px rgba(255, 215, 0, 0.3),
+                 0 0 60px rgba(255, 215, 0, 0.15);
   }
 }
 
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseGold {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(255, 215, 0, 0.3),
+                0 0 10px rgba(255, 215, 0, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.5),
+                0 0 30px rgba(255, 215, 0, 0.2);
+  }
+}
+
+@keyframes particle {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) scale(0);
+    opacity: 0;
+  }
+}
+
+/* ---------- Base Styles ---------- */
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-gold-500) var(--color-dark-600);
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-body);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar (Webkit) */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-dark-600);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-gold-500);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gold-300);
+}
+
+/* ---------- Utility Classes ---------- */
+
+/* Gold gradient text */
+.text-gold-gradient {
+  background: linear-gradient(
+    135deg,
+    var(--color-gold-100) 0%,
+    var(--color-gold-300) 40%,
+    var(--color-gold-500) 70%,
+    var(--color-gold-300) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Crusade red gradient text */
+.text-crusade-gradient {
+  background: linear-gradient(
+    135deg,
+    var(--color-crusade-300) 0%,
+    var(--color-gold-300) 50%,
+    var(--color-crusade-300) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Shimmer text effect */
+.text-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--color-gold-300) 0%,
+    var(--color-gold-100) 25%,
+    var(--color-gold-300) 50%,
+    var(--color-gold-100) 75%,
+    var(--color-gold-300) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+/* Gold border glow */
+.border-gold-glow {
+  border: 1px solid var(--color-border);
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.05),
+              inset 0 0 10px rgba(255, 215, 0, 0.02);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.border-gold-glow:hover {
+  border-color: var(--color-border-strong);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.1),
+              inset 0 0 20px rgba(255, 215, 0, 0.05);
+}
+
+/* Emerald glow variant */
+.border-emerald-glow {
+  border: 1px solid rgba(0, 255, 127, 0.15);
+  box-shadow: 0 0 10px rgba(0, 255, 127, 0.05);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.border-emerald-glow:hover {
+  border-color: rgba(0, 255, 127, 0.35);
+  box-shadow: 0 0 20px rgba(0, 255, 127, 0.1);
+}
+
+/* Surface card */
+.card-surface {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.card-surface:hover {
+  border-color: var(--color-border-strong);
+  box-shadow: 0 4px 30px rgba(255, 215, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+/* Metallic texture overlay */
+.texture-metal {
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(255, 215, 0, 0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 50%, rgba(0, 255, 127, 0.02) 0%, transparent 50%);
+}
+
+/* Dark gradient backgrounds */
+.bg-gradient-dark {
+  background: linear-gradient(
+    180deg,
+    var(--color-dark-600) 0%,
+    var(--color-dark-500) 50%,
+    var(--color-dark-600) 100%
+  );
+}
+
+.bg-gradient-dark-reverse {
+  background: linear-gradient(
+    180deg,
+    var(--color-dark-500) 0%,
+    var(--color-dark-600) 100%
+  );
+}
+
+/* Gold horizontal divider */
+.divider-gold {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-gold-500) 20%,
+    var(--color-gold-300) 50%,
+    var(--color-gold-500) 80%,
+    transparent 100%
+  );
+}
+
+/* Emerald horizontal divider */
+.divider-emerald {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-emerald-500) 20%,
+    var(--color-emerald-300) 50%,
+    var(--color-emerald-500) 80%,
+    transparent 100%
+  );
+}
+
+/* Hero overlay gradient */
+.hero-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(10, 10, 15, 0.4) 0%,
+    rgba(10, 10, 15, 0.6) 40%,
+    rgba(10, 10, 15, 0.85) 70%,
+    var(--color-dark-600) 100%
+  );
+}
+
+/* Section fade edges */
+.section-fade-top {
+  background: linear-gradient(
+    180deg,
+    var(--color-dark-600) 0%,
+    transparent 100%
+  );
+}
+
+.section-fade-bottom {
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    var(--color-dark-600) 100%
+  );
+}
+
+/* ---------- Selection ---------- */
+::selection {
+  background: rgba(255, 215, 0, 0.3);
+  color: var(--color-foreground);
+}
+
+/* ---------- Focus States (Accessibility) ---------- */
+:focus-visible {
+  outline: 2px solid var(--color-gold-300);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
 }
